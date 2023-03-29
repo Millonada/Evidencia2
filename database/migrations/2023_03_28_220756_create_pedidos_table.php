@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('idProducto')->references('id')->on('Productos')->onDelete('cascade');
+            $table->foreignId('idProducto')->references('id')->on('productos')->onDelete('cascade');
             $table->integer('cantidad');
             $table->float('precio',8,2);
             $table->float('total',8,2);

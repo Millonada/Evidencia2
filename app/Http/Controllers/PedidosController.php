@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pedidos;
-use App\Http\Controllers\Controller;
+
+
+use App\Models\Productos;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PedidosController extends Controller
 {
@@ -13,7 +15,9 @@ class PedidosController extends Controller
      */
     public function index()
     {
-        //
+        $productos=Productos::all();
+        //dd($productos);
+        return view('productos.index',compact('productos'));
     }
 
     /**
@@ -21,7 +25,7 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        //
+        return view('productos.create');
     }
 
     /**
