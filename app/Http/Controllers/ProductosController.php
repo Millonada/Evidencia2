@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Productos;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; 
 
 class ProductosController extends Controller
 {
@@ -13,7 +14,9 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        //
+        $productos=Productos::all();
+        //dd($productos);
+        return view('productos.index',compact('productos'));
     }
 
     /**
@@ -21,7 +24,7 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        //
+        return view('productos.create');
     }
 
     /**
@@ -29,7 +32,14 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datosProductos = request();
+
+        if($request->hasFile('foto')){
+            $datosProductos['foto']=$request->file('foto')->store('uploads','public');
+        }
+        
+        Productos::insert($datosProductos);
+        return redirect('/inventario/index')->with('mensaje', 'Producto agregado');
     }
 
     /**
