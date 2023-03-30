@@ -5,7 +5,7 @@ Inventario
 @section('slot')
 
 <div>
-    <a href="{{route('producto.create')}}">Agregar nuevo</a>
+    <a href="{{route('productos.create')}}">Agregar nuevo</a>
 </div>
 <table>
     <thead>
@@ -16,6 +16,7 @@ Inventario
          <th>foto</th>
          <th>Precio</th>
          <th>Stock</th>
+         <th>Acciones</th>
      </tr>
     </thead>
     <tbody>
@@ -27,6 +28,18 @@ Inventario
         <td>{{$producto->foto}}</td>
         <td>{{$producto->precio}}</td>
         <td>{{$producto->cantidadAlmacen}}</td>
+        <td> 
+            <a href= "{{ url('/productos/'.$producto->id.'/edit') }}" class= "btn btn-warning"> 
+                Editar
+            </a>
+
+            <form action="{{url('/productos/'.$producto->id)}} " method="post">
+                    @csrf
+                    {{ method_field('DELETE')}}    
+                    <input type="submit" onclick= "return confirm('¿Quieres borrar?')" 
+                        value="Borrar">
+            </form>
+        </td>
     </tr>
     @endforeach
     </tbody>

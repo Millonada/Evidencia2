@@ -14,9 +14,12 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $productos=Productos::all();
+        //$productos=Productos::all();
+
+        $datos['productos']= Productos::paginate(5);
+        return view('productos.index', $datos);
         //dd($productos);
-        return view('productos.index',compact('productos'));
+       // return view('productos.index',compact('productos'));
     }
 
     /**
@@ -32,14 +35,16 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        $datosProductos = request();
+        $datosProductos = request()-> except('_token');
 
         if($request->hasFile('foto')){
-            $datosProductos['foto']=$request->file('foto')->store('uploads','public');
+            $datosSuperheroe['foto']=$request->file('foto')->store('uploads','public');
         }
-        
+
         Productos::insert($datosProductos);
-        return redirect('/inventario/index')->with('mensaje', 'Producto agregado');
+
+
+        return response()-> json($datosProductos);
     }
 
     /**
@@ -69,8 +74,9 @@ class ProductosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Productos $productos)
+    public function destroy($id)
     {
-        //
+        Productos::destroy($id);
+        return redirect('productos')->with('mensaje', 'Producto eliminado OwO');
     }
 }
