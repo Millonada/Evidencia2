@@ -4,8 +4,12 @@ Nuevo producto
 @endsection
 @section('slot')
 
-<form action="{{ url('/productos') }}" method="post" enctyper="multipart/form-data">
-@csrf
-@include('productos.form');
-</form>
+<div class="container">
+
+    <form action= "{{ url('/productos') }}" method="post" enctype="multipart/form-data" >
+    @csrf
+    @include('productos.form', ['modo'=>'Crear']);
+    </form>
+</div>
+
 @endsection
