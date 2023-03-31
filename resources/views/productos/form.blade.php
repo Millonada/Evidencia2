@@ -29,6 +29,7 @@ value="{{ isset($productos->cantidadAlmacen)?$productos->cantidadAlmacen:'' }}" 
 
 
 <div class = "form-group">
+<label for="Foto"></label>
 @if(isset($productos->foto))
 <img class = "img-thumbnail img-fluid" src="{{ asset('storage').'/'.$productos->foto }}" width="100" alt="">
 @endif

@@ -56,9 +56,7 @@ class ProductosController extends Controller
             Storage::delete('public/'.$productos->foto);
             $datosProductos['foto']=$request->file('foto')->store('uploads','public');
         }
-
         Productos::where('id','=',$id)->update($datosProductos);
-
         //Recuperar datos
         $productos = Productos::findOrFail($id);
         //Pasar la info para que se muestre
