@@ -44,7 +44,7 @@ class ProductosController extends Controller
         Productos::insert($datosProductos);
 
 
-        return response()-> json($datosProductos);
+        return redirect()->back();
     }
 
     /**
