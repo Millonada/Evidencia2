@@ -11,9 +11,9 @@ Inventario
     <thead>
      <tr>
          <th>id</th>
+         <th>Foto</th>
          <th>Nombre</th>
          <th>Descripcion</th>
-         <th>foto</th>
          <th>Precio</th>
          <th>Stock</th>
          <th>Acciones</th>
@@ -23,13 +23,17 @@ Inventario
     @foreach ($productos as $producto)
     <tr>
         <td>{{$producto->id}}</td>
+        <td>
+        <img 
+        src="{{ asset('storage').'/'.$producto->foto }}" 
+        width="100" alt="" srcset="">
+        </td>
         <td>{{$producto->nombre}}</td>
         <td>{{$producto->descripcion}}</td>
-        <td>{{$producto->foto}}</td>
         <td>{{$producto->precio}}</td>
         <td>{{$producto->cantidadAlmacen}}</td>
         <td> 
-            <a href= "{{ url('/productos/'.$producto->id.'/edit') }}" class= "btn btn-warning"> 
+            <a href= "{{ url('/productos/'.$producto->id.'/edit') }}" > 
                 Editar
             </a>
 

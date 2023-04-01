@@ -9,74 +9,67 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //$productos=Productos::all();
-
-        $datos['productos']= Productos::paginate(5);
+        $datos['productos']= Productos::paginate(35);
         return view('productos.index', $datos);
         //dd($productos);
        // return view('productos.index',compact('productos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('productos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $datosProductos = request()-> except('_token');
 
         if($request->hasFile('foto')){
-            $datosSuperheroe['foto']=$request->file('foto')->store('uploads','public');
+            $datosProductos['foto']=$request->file('foto')->store('uploads','public');
         }
 
         Productos::insert($datosProductos);
-
-
-        return redirect()->back();
+        return redirect('productos')->with('mensaje', 'Producto agregado UwU');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Productos $productos)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Productos $productos)
+    public function edit($id)
     {
-        //
+        $productos= Productos::findOrFail($id);
+        return view('productos.edit', compact('productos'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Productos $productos)
+    public function update(Request $request, $id)
     {
-        //
+
+        $datosProductos = request()-> except(['_token','_method']);
+
+        if($request->hasFile('foto')){
+            $productos = Productos::findOrFail($id);
+            Storage::delete('public/'.$productos->foto);
+            $datosProductos['foto']=$request->file('foto')->store('uploads','public');
+        }
+        Productos::where('id','=',$id)->update($datosProductos);
+        //Recuperar datos
+        $productos = Productos::findOrFail($id);
+        //Pasar la info para que se muestre
+        return view('productos.edit', compact('productos'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-        Productos::destroy($id);
+        $productos = Productos::findOrFail($id);
+        if(Storage::delete('public/'.$productos->foto)){
+            Productos::destroy($id);
+        }
+        
         return redirect('productos')->with('mensaje', 'Producto eliminado OwO');
     }
 }
