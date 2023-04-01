@@ -16,11 +16,11 @@ class ProductosFactory extends Factory
     public function definition(): array
     {
         return [
-            'foto' => $this->faker->imageUrl(150,150),
+            'foto' => $this->faker->imageUrl(),
             'nombre' => $this->faker->name(),
             'descripcion' => $this->faker->text(),
-            'precio'=> $this->faker->randomFloat(),
-            'cantidadAlmacen'=> $this->faker->randomDigit(),
+            'precio'=> $this->faker->randomFloat(2,1,100),
+            'cantidadAlmacen'=> $this->faker->randomDigit(3, false),
         ];
     }
 }

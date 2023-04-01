@@ -2,7 +2,7 @@
 @section('title')
 Nuevo producto
 @endsection
-@section('slot')
+@section('content')
 
 <div class="container">
 
