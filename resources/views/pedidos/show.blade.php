@@ -2,7 +2,7 @@
 @section('title')
 Pedidos
 @endsection
-@section('slot')
+@section('content')
 
 <div class="container">
     <div class="row">

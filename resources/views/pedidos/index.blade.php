@@ -2,7 +2,7 @@
 @section('title')
 Pedidos
 @endsection
-@section('slot')
+@section('content')
 
 <div class="container">
     <div class="row">
@@ -61,7 +61,7 @@ Pedidos
                 </td>
                 <td>{{$pedido->estatus}}</td>
                 <td>
-                  <a href="{{route('pedidos.show',$pedido->id)}}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPedidoModal">Editar</a>
+                  <a href="{{route('pedidos.show',$pedido->id)}}" class="btn btn-primary" >Editar</a>
                   <form action="{{route('pedidos.delete',$pedido->id)}} " method="post">
                     @csrf
                     {{ method_field('DELETE')}}    

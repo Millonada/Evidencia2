@@ -2,10 +2,13 @@
 @section('title')
 Inventario
 @endsection
-@section('slot')
+@section('content')
 
 <div>
     <a href="{{route('productos.create')}}">Agregar nuevo</a>
+    @if(Session::has('mensaje'))
+    {{ Session::get('mensaje')}}
+    @endif
 </div>
 <table>
     <thead>

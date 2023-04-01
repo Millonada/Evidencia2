@@ -2,7 +2,7 @@
 @section('title')
 Editar producto
 @endsection
-@section('slot')
+@section('content')
 <div class="container">
     <form action="{{ url('/productos/'.$productos->id) }}" method= "post" enctype="multipart/form-data">
         @csrf
