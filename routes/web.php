@@ -24,3 +24,6 @@ Route::get('/inventario/index',[ProductosController::class,'index'])->name('prod
 Route::get('/almacen/create',[ProductosController::class,'create'])->name('productos.create');
 //Todas las rutas del controlador
 Route::resource('productos', ProductosController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
